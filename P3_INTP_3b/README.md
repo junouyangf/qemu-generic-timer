@@ -13,3 +13,24 @@ Datasheet BCM2837
 
 Datasheet Procesador ARM Cortex-A53
 >https://developer.arm.com/documentation/ddi0500/j/Generic-Timer/Generic-Timer-register-summary/AArch64-Generic-Timer-register-summary?lang=en
+
+#Depuración
+1) Abrir 3 terminales
+> ./qemu-rpi-gpio
+
+>./run.sh
+
+>./debug.sh
+
+2) En el terminal de depuración, pondremos un breakpoint para acceder al main:
+> b main
+
+> c
+
+3) A continuación, pondremos un breakpoint en la línea 202 para poder ver el tratamiento de las interrupciones periódicas:
+> b 202
+
+> c
+
+4) Para comprobar que el programa esté funcionando correctamente, utilizaremos el terminal de qemu-rpip-gpio y leeremos el valor del GPIO 6, el cual cada vez que se produce la interrupción alterna su valor (true o false).
+> get 6
