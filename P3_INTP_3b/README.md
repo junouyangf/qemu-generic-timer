@@ -10,5 +10,6 @@ Un temporizador virtual. → Usamos este
 
 Datasheet BCM2837
 >https://datasheets.raspberrypi.com/bcm2836/bcm2836-peripherals.pdf
+
 Datasheet Procesador ARM Cortex-A53
 >https://developer.arm.com/documentation/ddi0500/j/Generic-Timer/Generic-Timer-register-summary/AArch64-Generic-Timer-register-summary?lang=en
