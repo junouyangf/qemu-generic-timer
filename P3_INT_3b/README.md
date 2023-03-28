@@ -1,5 +1,6 @@
 # Práctica 3 con Interrupciones GPIO
 Funcionamiento: Encendido y apagado de un LED (GPIO 5) mediante la pulsación de un botón (GPIO 19).
+
 Cuidado: Para poder probar la práctica hay que cambiar antes las rutas que vienen en los scripts.
 
 Datasheet BCM2837
