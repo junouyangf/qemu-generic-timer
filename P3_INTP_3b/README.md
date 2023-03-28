@@ -14,7 +14,7 @@ Datasheet BCM2837
 Datasheet Procesador ARM Cortex-A53
 >https://developer.arm.com/documentation/ddi0500/j/Generic-Timer/Generic-Timer-register-summary/AArch64-Generic-Timer-register-summary?lang=en
 
-#Depuración
+# Depuración
 1) Abrir 3 terminales
 > ./qemu-rpi-gpio
 
