@@ -28,4 +28,5 @@ Datasheet BCM2837
 
 Cada vez que cambiemos el valor del GPIO 19 de 0 a 1 el valor del GPIO 5 cambiará:
 > set 19 1
+
 > get 5
