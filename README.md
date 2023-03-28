@@ -3,7 +3,7 @@ Raspberry Pi 3b bare metal.
 |nombre          |                                                           |
 |----------------|-----------------------------------------------------------|
 |[P3_INTP_3b](https://github.com/junouyangf/qemu-int/tree/main/P3_INTP_3b)|Práctica 3 implementada con Generic Timer|
-|[P3_INT_3b](https://github.com/junouyangf/qemu-int/tree/main/P3_INT_3b)|Práctica 3 implementada con Interrupciones GPIO|
+|[P3_INT_3b](https://github.com/junouyangf/qemu-int/tree/main/P3_INT_3b)|Práctica 3 implementada con Interrupciones GPIO (sin timer)|
 
 # Toolchain
 Toolchain usado para la compilación del código para la raspi 3b. (gcc-system-aarch64)
