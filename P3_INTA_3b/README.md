@@ -2,6 +2,7 @@
 Cuidado: Para poder probar la práctica hay que cambiar antes las rutas que vienen en los scripts.
 
 Para la implementación nos hemos basado en el manual que se nos adjuntó para la realización de la práctica.
+Suponemos que el ARM Timer no es funcional ya que en la configuración del QEMU este no está implementado (en la línea 51 de /include/hw/arm/bcm2835_peripherals.h indica que armtmr es un UnimplementedDeviceState).
 
 Datasheet BCM2837
 >https://datasheets.raspberrypi.com/bcm2836/bcm2836-peripherals.pdf
