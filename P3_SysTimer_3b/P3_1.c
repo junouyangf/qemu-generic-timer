@@ -132,19 +132,6 @@ void setup_gpio()
 
 void c_irq_handler (void)
 {
-	// Comprobar si hay alguna petición pendiente
-	if (IRQ_PEND2 & (0x1 << 17)) {
-		//Interrupción del GPIO19
-		if (GPEDS0 & (0x1 << 19)) {
-			long_wait();
-			if (button_read() == BUTTON_PUSHED) {
-				//Tratamos la pulsación del botón
-				led_switch();
-			}
-			//Reconocemos la interrupción
-			GPEDS0 = 0x1 << 19;
-		}
-	}
 	
 	irq_counter++;
 	PUT32(CS, 2);
@@ -189,19 +176,32 @@ int main (void)
 		// Mientras no se produzca la interrupción nos quedamos en el while.
 		while(irq_counter==ra) continue;
 		
-		// Volvemos a obtener el valor para que mientras no haya pasado el tiempo se quede
-		// en el siguiente while.
+	
+		irq_counter=0;
 		ra=irq_counter;
 		
-		// Sumamos el intervalo de nuevo para el siguiente "tick"
+		interval=0x00080000;
+		rx=GET32(CLO);
+		
 		rx+=interval;
+		
+		
 		PUT32(C1,rx);
+		
 
 		led2_switch();
 
 		while(irq_counter==ra) continue;
+		
+		
+		irq_counter=0;
 		ra=irq_counter;
+		
+		interval=0x00080000;
+		rx=GET32(CLO);
+		
 		rx+=interval;
+		
 		PUT32(C1,rx);
 
 		led2_switch();
