@@ -194,7 +194,7 @@ void c_irq_handler (void)
 {
 	// Comprobar si hay alguna petición pendiente
 	// Bit 3 de Core 0 Interrupt Source = CNTVIRQ Interrupt
-	if (read_core0timer_pending() & 0x08) {
+	if (read_core0timer_pending() & (0x1 << 3)) {
 		// Interrupcion del timer
 		led2_switch();
 		
