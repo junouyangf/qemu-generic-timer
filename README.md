@@ -2,6 +2,7 @@ Raspberry Pi 3b bare metal.
 
 |nombre          |                                                           |
 |----------------|-----------------------------------------------------------|
+|[P3_3b](https://github.com/junouyangf/qemu-int/tree/main/GUI)|Proyecto de Interfaz Gráfica|
 |[P3_3b](https://github.com/junouyangf/qemu-int/tree/main/P3_3b)|Práctica 3 sin interrupciones|
 |[P3_GPIO_3b](https://github.com/junouyangf/qemu-int/tree/main/P3_GPIO_3b)|Práctica 3 implementada con Interrupciones GPIO (sin timer)|
 |[P3_GenericTimer_3b](https://github.com/junouyangf/qemu-int/tree/main/P3_GenericTimer_3b)|Práctica 3 implementada con Generic Timer|
