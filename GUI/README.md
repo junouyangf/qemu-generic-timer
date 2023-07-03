@@ -1,6 +1,6 @@
 # Requisitos
 + Instalar QEMU (y aplicarle el parche para la interacción con los GPIO), debes tener una versión local de QEMU que soporte QTEST.
-+ Instalar las dependencias del fichero dependencias.sh mediante el comando ./dependencias.sh (si no puedes revisa los permisos del fichero - sudo chmod +x dependencias.sh).
++ Instalar las dependencias del fichero dependencias.sh mediante el comando ./dependencias.sh (si no puedes revisa los permisos del fichero).
 + Para probar la aplicación sin tu propia imagen o kernel incluimos un .elf
 
 # Uso
