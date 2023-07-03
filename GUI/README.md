@@ -8,7 +8,7 @@
 
 + Una vez ejecutado debería aparecer una ventana nueva con la interfaz de usuario, el terminal donde se ha ejecutado el comando anterior servirá de debug para ver potenciales errores y mensajes del sistema, asi como otros indicadores útiles para saber si esta funcionando correctamente, como por ejemplo: al introducir valores no válido en elgun campo de texto o rutas a archivos inexistentes.
 
-+ Si abres la aplicación por primera vez aparecerá un explorador de archivos para que selecciones el path a QEMU, es importante asegurarse de que el directorio introducido es el interior de QEMU, donde se encuentra el directorio BUILD. (p.e: /ruta/qemu-master - dentro de esta carpeta se encuentra /build)
++ Si abres la aplicación por primera vez aparecerá un explorador de archivos para que selecciones el path a QEMU, es importante asegurarse de que el directorio introducido es el interior de QEMU, donde se encuentra el directorio BUILD. (p.e: /ruta/qemu-master - dentro de esta carpeta se encuentra /build).
 + Una vez introducido correctamente, se creará el fichero path.cof, donde se guardará tu ruta, no tendrás que ponerla más si no mueves el directorio o pruebas otra instalación.
 
 + Una vez hecho esto verás múltiples botones al lado derecho de la ventana y una imagen de la Raspberry Pi 3b en el lado izquierdo, veamos las distintas funcionalidades una a una (al pasar el puntero por encima de cada botón aparece su nombre).
