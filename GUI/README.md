@@ -1,9 +1,9 @@
-# REQUISITOS
+# Requisitos
 Instalar QEMU, debes tener una versión local de QEMU que soporte QTEST.
 Instalar las dependencias del fichero dependencias.sh mediante el comando ./dependencias.sh (si no puedes revisa los permisos del fichero)
 Para probar la aplicación sin tu propia imagen o kernel incluimos un .elf
 
-# USO
+# Uso
 + Para ejecutar el programa es necesario escribir en el terminal: python3 prueba.py
 
 + Una vez ejecutado debería aparecer una ventana nueva con la interfaz de usuario, el terminal donde se ha ejecutado el comando anterior servirá de debug para ver potenciales errores y mensajes del sistema, asi como otros indicadores útiles para saber si esta funcionando correctamente.
@@ -33,5 +33,5 @@ Para probar la aplicación sin tu propia imagen o kernel incluimos un .elf
 	- Clic derecho sobre raspberry PI 3: abre un PopUp que muestra para cada pin de la raspberry pi 3 (1-40) su estado actual, si es de tierra o corriente se indica con Ground o Power, para los GPIO se indica el número y si esta configurado como entrada o salida o como modo alternativo (0-5) (esta configuracón se hace de forma interna, no mediante esta herramienta) Debajo hay un link a una página con información más detallada sobre cada pin. Para Esta opción es necesario tener una imagen o kernel cargado, de lo contrario no reaccionará.
 	
 	
-# KERNEL INCLUIDO
+# Kernel incluido en el proyecto
 El .elf que incluimos consiste en un contador creciente, cuyo valor se envía por los GPIO del 1 al 7  ,de forma que si conectamos unos leds a estos GPIO formarán un display de siete segmentos. El gpio 19 se puede usar como entrada para un botón y alternar de esta forma la velocidad del contador entre lenta y rápida. Para hacer uso del botón es necesario tener la versión de QEMU parcheada por berdav para permitir interrupciones por GPIO
