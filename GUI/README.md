@@ -1,9 +1,9 @@
----REQUISITOS---
+# REQUISITOS
 Instalar QEMU, debes tener una versión local de QEMU que soporte QTEST.
 Instalar las dependencias del fichero dependencias.sh mediante el comando ./Dependencias.sh (si no puedes revisa los permisos del fichero)
 Para probar la aplicación sin tu propia imagen o kernel incluimos un .elf
 
----USO---
+# USO
 + Para ejecutar el programa es necesario escribir en el terminal: python3 prueba.py
 
 + Una vez ejecutado debería aparecer una ventana nueva con la interfaz de usuario, el terminal donde se ha ejecutado el comando anterior servirá de debug para ver potenciales errores y mensajes del sistema, asi como otros indicadores útiles para saber si esta funcionando correctamente.
