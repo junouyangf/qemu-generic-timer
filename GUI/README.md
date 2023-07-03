@@ -1,6 +1,6 @@
 # REQUISITOS
 Instalar QEMU, debes tener una versión local de QEMU que soporte QTEST.
-Instalar las dependencias del fichero dependencias.sh mediante el comando ./Dependencias.sh (si no puedes revisa los permisos del fichero)
+Instalar las dependencias del fichero dependencias.sh mediante el comando ./dependencias.sh (si no puedes revisa los permisos del fichero)
 Para probar la aplicación sin tu propia imagen o kernel incluimos un .elf
 
 # USO
