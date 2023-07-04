@@ -1,6 +1,7 @@
 # Requisitos
 + Descargar el fichero .py y el directorio IMG
 + Instalar las dependencias del fichero dependencias.sh mediante el comando ./dependencias.sh (si no puedes revisa los permisos del fichero).
++ Tener instalada una versión de QEMU compatible con QTEST
 + Para probar la aplicación sin tu propia imagen o kernel incluimos un .elf
 + La aplicación ha sido desarrollada y probada en ubuntu 22
 
@@ -16,7 +17,7 @@
 
 	- Cargar kernel / imagen, sus iconos son un chip y (OS) respectivamente, el boton kernel permite cargar un archivo .elf a modo de kernel. Por otro lado el botón imagen permite cargar una imagen de SO .img, junto con su kernel.img y su fichero .dtb. Si se cargan los ficheros correctamente se abrirá un nuevo terminal de QEMU, por el que veremos la salida del sistema emulado. En cualquier momento se puede repetir este proceso y pasar de un sistema baremetal a otro con SO.
 	
-	- Botones y leds, su icono es el de un botón y un led respectivamente. Al hacer clic aparecerá un botón/led al lado izquierdo de la ventana. Al hacer clic sobre ellos los podremos conectar a un GPIO (no a un pin) por medio de un pop up, los GPIO están numerados de 0 al 27. Una vez conectado un led o un botón verás una linea roja que lo une con su respectivo pin en la Raspberry (si te molesta no te preocupes, más adelante lo ocultamos). Los leds comenzarán a recibir el valor del GPIO indicado, realizando consultas periódicas mediante QTEST a QEMU, en caso de recibir un 1 se encienden (color rojo). Al hacer clic sobre un botón se realiza una pulsación, se pone el GPIO correspondiente a 1 y cuando se suelta regresará a 0. Tanto los leds como los botones se pueden tanto desplazar, manteniendo el click derecho del ratón, y eliminar con click central (rueda del ratón).
+	- Botones y leds, su icono es el de un botón y un led respectivamente. Al hacer clic aparecerá un botón/led al lado izquierdo de la ventana. Al hacer clic derecho sobre ellos los podremos conectar a un GPIO (no a un pin) por medio de un pop up, los GPIO están numerados de 0 al 27. Una vez conectado un led o un botón verás una linea roja que lo une con su respectivo pin en la Raspberry (si te molesta no te preocupes, más adelante lo ocultamos). Los leds comenzarán a recibir el valor del GPIO indicado, realizando consultas periódicas mediante QTEST a QEMU, en caso de recibir un 1 se encienden (color rojo). Al hacer clic sobre un botón se realiza una pulsación, se pone el GPIO correspondiente a 1 y cuando se suelta regresará a 0. Tanto los leds como los botones se pueden tanto desplazar, manteniendo el click derecho del ratón, y eliminar con click central (rueda del ratón). Para usar los leds y los botones es necesario haber introducido un path a QEMU y estar emulando un sistema
 	
 	- Guardar: Al hacer click se guarda la disposición de items en la pantalla y sus conexiones, no se guarda el estado de QEMU, solo los items gráficos. El guardado actualmente se hace en el directorio donde esta el fichero.py, en un fichero .json.
 	
