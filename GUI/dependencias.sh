@@ -15,5 +15,6 @@ sudo apt install python3-dev -y
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 sudo pip3 install pexpect
+sudo pip install --upgrade psutil
 
 echo "Installation complete."
