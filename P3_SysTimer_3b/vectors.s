@@ -47,16 +47,9 @@ start_el2:
 
 start_el1:
     // set sp
-    mov   sp, x1
-    // Clear bss.
-    ldr   x1, =__bss_start
-    ldr   w2, =__bss_size
-1:  cbz   w2, 2f
-    str   xzr, [x1], #8
-    sub   w2, w2, #1
-    cbnz  w2, 1b
+    mov   sp, #0x08000000
 
-2:  bl main
+    bl main
 
 hang:
     wfi
