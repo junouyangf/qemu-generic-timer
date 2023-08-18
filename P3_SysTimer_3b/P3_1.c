@@ -4,8 +4,6 @@
 #define LED_ON  1
 #define BUTTON_PUSHED   1
 #define BUTTON_RELEASED 0
-#define TRACKING 1
-#define INVERSE 0
 
 #define CS  0x3F003000
 #define CLO 0x3F003004
