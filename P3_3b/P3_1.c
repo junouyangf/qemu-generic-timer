@@ -4,9 +4,6 @@
 #define LED_ON  1
 #define BUTTON_PUSHED   1
 #define BUTTON_RELEASED 0
-#define TRACKING 1
-#define INVERSE 0
-
 
 int led1, led2;
 
