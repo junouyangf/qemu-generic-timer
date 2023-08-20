@@ -35,7 +35,7 @@ start_el2:
     eret
 
 start_el1:
-    mov   sp, #0x08000000
+    mov   sp, #0x08000000 //NO SE SI VA
     bl main
 
 hang:
