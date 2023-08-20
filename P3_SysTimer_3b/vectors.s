@@ -1,11 +1,6 @@
 
 .text
 .globl _start
-
- .balign 4096
-vector:
-.balign 256
-    b irq
     
 _start:
    
@@ -94,4 +89,7 @@ irq:
     eret
 
 
-
+ .balign 4096
+vector:
+.balign 256
+    b irq
