@@ -88,8 +88,36 @@ irq:
     ldp   x0,  x1,  [sp], #16
     eret
 
-
- .balign 4096
+.balign 4096
 vector:
-.balign 256
+.balign 128
+    b hang
+.balign 128
     b irq
+.balign 128
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b irq
+.balign 128
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b irq
+.balign 128
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b irq
+.balign 128
+    b hang
+.balign 128
