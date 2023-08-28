@@ -19,23 +19,24 @@ _start:
     eret
 
 start_el2:
+    ldr   x1, =_start
+    msr   sp_el1, x1
 
-    // enable AArch64 in EL1
     mov   x0, #(1 << 31)      // AArch64
-    orr   x0, x0, #(1 << 1)   // SWIO hardwired on Pi3
+
     msr   hcr_el2, x0
-    // set vector address in EL1.
+
     ldr x0, =vector
     msr vbar_el1, x0 
-    // change execution level to EL1
-    mov   x2, #0x3c4         // D=1, A=1, I=1, F=1 M=EL1t
+
+    mov   x2, #0x3c5         // D=1, A=1, I=1, F=1 M=EL1h
     msr   spsr_el2, x2
     adr   x2, start_el1
     msr   elr_el2, x2
     eret
 
 start_el1:
-    mov   sp, #0x08000000 //NO SE SI VA
+
     bl main
 
 hang:
@@ -60,7 +61,7 @@ PUT32:
 .globl GET32
 GET32:
     ldr x0,[x0]
-    ret
+    ret 
 
 irq:
     stp   x0,  x1,  [sp, #-16]!
@@ -88,20 +89,12 @@ irq:
     ldp   x0,  x1,  [sp], #16
     eret
 
-.balign 4096
+
 vector:
 .balign 128
     b hang
 .balign 128
-    b irq
-.balign 128
     b hang
-.balign 128
-    b hang
-.balign 128
-    b hang
-.balign 128
-    b irq
 .balign 128
     b hang
 .balign 128
@@ -117,7 +110,15 @@ vector:
 .balign 128
     b hang
 .balign 128
-    b irq
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b hang
+.balign 128
+    b hang
 .balign 128
     b hang
 .balign 128
