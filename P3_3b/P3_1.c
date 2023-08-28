@@ -101,13 +101,6 @@ void setup_gpio()
     // Configurar GPIO 20 como INPUT (000) --> P2
     GPFSEL2 = GPFSEL2 & ~(0x7 << 0*3);
 
-    // Activar el pull-up de los GPIO 19 y 20
-    GPPUD     = 0x2;
-    short_wait();
-    GPPUDCLK0 = (0x1 << 20) | (0x1 << 19);
-    short_wait();
-    GPPUD     = 0;
-    GPPUDCLK0 = 0;
 }
 
 int main (void)
