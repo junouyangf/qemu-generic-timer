@@ -74,14 +74,6 @@ void setup_gpio()
 	// Configurar GPIO 5 como OUTPUT (001) --> LED
 	GPFSEL0 = (GPFSEL0 & ~(0x7 << 5*3)) | (0x1 << 5*3);
 	
-	// Activar el pull-up del GPIO 19
-	GPPUD = 0x2;
-	short_wait();
-	GPPUDCLK0 = (0x1 << 19);
-	short_wait();
-	GPPUD = 0;
-	GPPUDCLK0 = 0;
-	
 	// Activar detección de flanco de subida para GPIO 19
 	GPREN0 = (0x1 << 19);
 
