@@ -20,6 +20,7 @@ void c_irq_handler(void) __attribute__ ((interrupt ("IRQ")));
 int mode = 0;
 int led;
 int led2;
+unsigned int interval=0x00800000;
 volatile unsigned int irq_counter;
 
 void led_on(void)
@@ -111,8 +112,7 @@ void setup_gpio()
 	// Activar detección de flanco de subida para GPIO 19
 	GPREN0 = (0x1 << 19);
 
-	// Habilitar las interrupciones gpio_int[0-3]
-	// Los IRQ de los GPIO corresponden a los bits 17,18,19 y 20 de IRQ_ENABLE2
+	// Habilitar las interrupciones gpio_int[0]
 	IRQ_ENABLE_IRQS_2 = (0x1 << 17);
 	
 	enable_irq();
@@ -121,11 +121,9 @@ void setup_gpio()
 
 void c_irq_handler (void)
 {
-	unsigned int interval;
+	
 	if(GET32(CS) & 0x2){	
 		
-		if (mode == 0)interval=0x00800000;
-		else interval=0x0080000;
 		unsigned int rx=GET32(CLO);
 			
 		rx+=interval;
@@ -172,15 +170,12 @@ int main (void)
 
 	
 	unsigned int rx;
-	unsigned int interval;
 
 	setup_gpio();
 
 	led_off();
 	led2_off();
 
-	interval=0x00080000;
-	
 	// CLO nos devuelve los últimos 32 bits del free-running counter.
 	rx=GET32(CLO);
 	rx+=interval;
@@ -198,5 +193,4 @@ int main (void)
 	
 	return 0;
 }
-
 
