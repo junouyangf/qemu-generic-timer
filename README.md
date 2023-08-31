@@ -3,9 +3,9 @@ Raspberry Pi 3b bare metal.
 |nombre          |                                                           |
 |----------------|-----------------------------------------------------------|
 |[GUI](https://github.com/junouyangf/qemu-int/tree/main/GUI)|Proyecto de Interfaz Gráfica|
-|[esperaActiva](https://github.com/junouyangf/qemu-int/tree/main/P3_3b)|Programa bare-metal de E/S por espera activa|
-|[intGpio](https://github.com/junouyangf/qemu-int/tree/main/P3_GPIO_3b)|Programa bare-metal implementado con Interrupciones GPIO (sin timer)|
-|[intSysTimer](https://github.com/junouyangf/qemu-int/tree/main/P3_SysTimer_3b)|Programa bare-metal implementado con System Timer|
+|[esperaActiva](https://github.com/junouyangf/qemu-int/tree/main/esperaActiva)|Programa bare-metal de E/S por espera activa|
+|[intGpio](https://github.com/junouyangf/qemu-int/tree/main/intGpio)|Programa bare-metal implementado con Interrupciones GPIO (sin timer)|
+|[intSysTimer](https://github.com/junouyangf/qemu-int/tree/main/intSysTimer)|Programa bare-metal implementado con System Timer|
 
 # Toolchain
 Toolchain usado para la compilación del código para la raspi 3b. (gcc-system-aarch64)
