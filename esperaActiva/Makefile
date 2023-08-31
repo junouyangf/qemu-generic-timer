@@ -26,13 +26,13 @@ clean :
 vectors.o : vectors.s
 	$(ARMGNU)-as $(AOPS) $(ASFLAGS)  vectors.s -o vectors.o
 
-P3_1.o : P3_1.c
-	$(ARMGNU)-gcc $(COPS) $(CFLAGS) -c P3_1.c -o P3_1.o
+esperaActiva.o : esperaActiva.c
+	$(ARMGNU)-gcc $(COPS) $(CFLAGS) -c esperaActiva.c -o esperaActiva.o
 
-kernel8.img : memmap vectors.o P3_1.o 
-	$(ARMGNU)-ld vectors.o P3_1.o -T memmap -o P3_1.elf
-	$(ARMGNU)-objdump -D P3_1.elf > P3_1.list
-	$(ARMGNU)-objcopy --srec-forceS3 P3_1.elf -O srec P3_1.srec
-	$(ARMGNU)-objcopy P3_1.elf -O binary kernel8.img
+kernel8.img : memmap vectors.o esperaActiva.o 
+	$(ARMGNU)-ld vectors.o esperaActiva.o -T memmap -o esperaActiva.elf
+	$(ARMGNU)-objdump -D esperaActiva.elf > esperaActiva.list
+	$(ARMGNU)-objcopy --srec-forceS3 esperaActiva.elf -O srec esperaActiva.srec
+	$(ARMGNU)-objcopy esperaActiva.elf -O binary kernel8.img
 
 

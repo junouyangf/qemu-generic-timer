@@ -26,13 +26,13 @@ clean :
 vectors.o : vectors.s
 	$(ARMGNU)-as  $(ASFLAGS)  vectors.s -o vectors.o
 
-P3_1.o : P3_1.c
-	$(ARMGNU)-gcc $(COPS) $(CFLAGS) -c P3_1.c -o P3_1.o
+intGpio.o : intGpio.c
+	$(ARMGNU)-gcc $(COPS) $(CFLAGS) -c intGpio.c -o intGpio.o
 
-kernel8.img : memmap vectors.o P3_1.o 
-	$(ARMGNU)-ld vectors.o P3_1.o -T memmap -o P3_1.elf
-	$(ARMGNU)-objdump -D P3_1.elf > P3_1.list
-	$(ARMGNU)-objcopy --srec-forceS3 P3_1.elf -O srec P3_1.srec
-	$(ARMGNU)-objcopy P3_1.elf -O binary kernel8.img
+kernel8.img : memmap vectors.o intGpio.o 
+	$(ARMGNU)-ld vectors.o intGpio.o -T memmap -o intGpio.elf
+	$(ARMGNU)-objdump -D intGpio.elf > intGpio.list
+	$(ARMGNU)-objcopy --srec-forceS3 intGpio.elf -O srec intGpio.srec
+	$(ARMGNU)-objcopy intGpio.elf -O binary kernel8.img
 
 

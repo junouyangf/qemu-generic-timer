@@ -26,13 +26,13 @@ clean :
 vectors.o : vectors.s
 	$(ARMGNU)-as  $(ASFLAGS)  vectors.s -o vectors.o
 
-P3_1.o : P3_1.c
-	$(ARMGNU)-gcc $(COPS) $(CFLAGS) -c P3_1.c -o P3_1.o
+intSysTimer.o : intSysTimer.c
+	$(ARMGNU)-gcc $(COPS) $(CFLAGS) -c intSysTimer.c -o intSysTimer.o
 
-kernel8.img : memmap vectors.o P3_1.o 
-	$(ARMGNU)-ld vectors.o P3_1.o -T memmap -o P3_1.elf
-	$(ARMGNU)-objdump -D P3_1.elf > P3_1.list
-	$(ARMGNU)-objcopy --srec-forceS3 P3_1.elf -O srec P3_1.srec
-	$(ARMGNU)-objcopy P3_1.elf -O binary kernel8.img
+kernel8.img : memmap vectors.o intSysTimer.o 
+	$(ARMGNU)-ld vectors.o intSysTimer.o -T memmap -o intSysTimer.elf
+	$(ARMGNU)-objdump -D intSysTimer.elf > intSysTimer.list
+	$(ARMGNU)-objcopy --srec-forceS3 intSysTimer.elf -O srec intSysTimer.srec
+	$(ARMGNU)-objcopy intSysTimer.elf -O binary kernel8.img
 
 
