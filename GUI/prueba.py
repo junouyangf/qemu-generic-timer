@@ -938,7 +938,7 @@ class GUI():
         return s
         
     def choose_file(self,text, file_types,title):
-        return filedialog.askopenfilename(filetypes=[("Archivos ELF e IMG", "*.elf *.img")],title="Selecciona un kernel (.elf o .img)")
+        return filedialog.askopenfilename(filetypes=[(file_types)],title=title)
 
     
 
