@@ -2,7 +2,7 @@
 + Descargar el fichero .py y el directorio IMG
 + Instalar las dependencias del fichero dependencias.sh mediante el comando ./dependencias.sh (si no puedes revisa los permisos del fichero).
 + Tener instalada una versión de QEMU compatible con QTEST
-+ Para probar la aplicación sin tu propia imagen o kernel incluimos un .elf
++ Para probar la aplicación sin tu propia imagen o kernel incluimos un ELF
 + La aplicación ha sido desarrollada y probada en ubuntu 22
 
 # Uso
