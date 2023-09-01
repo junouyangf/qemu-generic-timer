@@ -938,8 +938,7 @@ class GUI():
         return s
         
     def choose_file(self,text, file_types,title):
-        return filedialog.askopenfilename(filetypes=[(file_types)],title=title)
-
+        return filedialog.askopenfilename(filetypes=[(text, file_types)],title=title)
     
 
     def print_terminal(self,texto):
