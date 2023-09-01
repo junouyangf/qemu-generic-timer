@@ -90,7 +90,10 @@ def raspi_clic(event):
     global app,gui
     if app.proceso_qemu is not None:
         config_GPIO = app.vgpio.carga_estado_GPIO()
-        gui.popup_GPIO(config_GPIO,event.x_root ,event.y_root,app.proceso_qemu)
+        if config_GPIO == -1:
+        	gui.popup_error("No se pudo cargar el estado de los GPIO")
+        else:
+        	gui.popup_GPIO(config_GPIO,event.x_root ,event.y_root,app.proceso_qemu)
     else:
         gui.popup_error("No hay emulaciones activas")
     
@@ -152,7 +155,7 @@ def save_clic(event = None):
     with open(absolute_path + "datos.json", "w") as json_file:
         json.dump(data, json_file)
 
-    (json.dumps(data, indent=4))
+    print(json.dumps(data, indent=4))
 
 def load_clic(event = None):
     clean_clic()
@@ -198,7 +201,9 @@ def emulacion_activa():
 def load_baremetal_clic(event):
     global gui,app
     archivo_aux = gui.choose_file("Archivos ELF e IMG","*.elf *.img","Selecciona un kernel (.elf o .img)") 
-    app.load_baremetal_file(archivo_aux)
+    if app.load_baremetal_file(archivo_aux) is not True:
+    	gui.popup_error("No existe el path indicado")
+        
 def delay_clic(event):
     global gui,app
     gui.popup_delay()
@@ -211,7 +216,9 @@ def clic_aceptar_delay(event):
 def path_clic(event):
     global gui,app
     ruta = gui.choose_directory()
-    app.set_QEMU_path(ruta)
+    if app.set_QEMU_path(ruta) is not True:
+    	gui.popup_error("Ruta no válida")
+    
 def close():
     global app
     app.close()
@@ -221,7 +228,8 @@ def img_clic(event):
     archivo_kernel_aux = gui.choose_file("Archivos ELF e IMG","*.elf *.img","Selecciona un kernel (.elf o .img)") 
     archivo_img_aux = gui.choose_file("Archivos IMG","*.img","Selecciona una imagen (.img)") 
     archivo_dbt_aux = gui.choose_file("Archivos DTB","*.dtb","Selecciona un archivo DTB (.dtb)") 
-    app.load_img(archivo_kernel_aux,archivo_img_aux,archivo_dbt_aux)
+    if app.load_img(archivo_kernel_aux,archivo_img_aux,archivo_dbt_aux) is not True:
+    	gui.popup_error("No existe el path indicado")
 
 def lines_clic(event):
     global gui,app
@@ -404,7 +412,7 @@ class VGPIOManager(object):
             return config_GPIO
 
         except:
-            print("No se pudo cargar el estado de los pines")
+            return -1
 
     def toggle(self, gpionum):
         v = self.get(gpionum)
@@ -639,11 +647,12 @@ class GUI():
     def add_item(self,imagen,tipo, on_hold_func=None, on_release_func=None):
         x = 50 #+ (elementos % 5) * 100  # 5 es el número máximo de elementos por fila
         y = 50 #+(elementos // 5) * 50 
+
        
         identificador = self.canvas.create_image(x, y , tags = tipo)
         self.imagenes_mostradas[identificador]  = ImageTk.PhotoImage(file=imagen)
         self.canvas.itemconfig(identificador,image= self.imagenes_mostradas[identificador] )
-      
+
         self.canvas.tag_bind(identificador, "<B1-Motion>", lambda event: on_motion(event, identificador))
         self.canvas.tag_bind(identificador, "<Button-3>", lambda event: show_popup(event, identificador))
         self.canvas.tag_bind(identificador, "<Button-2>", lambda event: delete_clic(event, identificador))
@@ -977,7 +986,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
                     print(f"Cargando qemu_path desde path.cof: {self.qemu_path}")
                 
             except Exception  as e: 
-                print(f"Se ha producido una excepción: " + e) #Quitar try-except para verla
+                print(f"Se ha producido una excepción: " + e) 
                 self.close()
     def add_item(self,id,tipo):
         with self.mutex:
@@ -1022,7 +1031,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
                 gpio =  conexiones[id]
                 with self.mutex_gpio:
                     self.vgpio.set(int(gpio), 1)
-                    print("set " + str(gpio) + " 1")
+                  
     def button_release(self,id):
         conexiones= self.dame_conexiones()
         if self.emulacion_activa():
@@ -1030,7 +1039,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
                 gpio =  conexiones[id]
                 with self.mutex_gpio:
                     self.vgpio.set(int(gpio), 0)
-                    print("set " + str(gpio) + " 0")
+               
 
 
     def conect_gpio(self,gpio, id): #Ordenar
@@ -1069,13 +1078,10 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
                 self.archivo_kernel = ""
                 self.archivo_img = ""
                 self.archivo_dbt = ""
-            else:
-                print("Kernel cargado, el path a QEMU no se ha asignado aún")
                 
             return True
-        else:
-            print("No existe el path indicado,debes introducir un correcto para poder iniciar o reiniciar")
-        
+       
+            
         return False
         
     def load_img(self,archivo_kernel_aux,archivo_img_aux,archivo_dbt_aux):
@@ -1099,19 +1105,11 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
                         self.archivo_img = archivo_img_aux
                         self.archivo_dbt = archivo_dbt_aux
                         self.archivo = ""
-                    else:
-                        print("Ficheros cargados, el path a QEMU no se ha asignado aún")
+               
 
                     return True
 
-                else:
-                    print("El fichero dtb seleccionado no existe")
-
-            else:
-                print("La imagen del SO seleccionado no existe")
-
-        else:
-            print("El kernel seleccionado no existe")
+              
         return False
 
     def set_QEMU_path(self,qemu_path_aux):
@@ -1126,14 +1124,14 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
             self.qemu_path = qemu_path_aux
             self.guardar_path_qemu(self.qemu_path)
             return True
-        else:
-            print("No existe el path indicado,debes introducir un correcto para poder iniciar o reiniciar, se mantendrá el anterior")
+     
+       
         return False
 
     def guardar_path_qemu(self,qemu_path):
         with open(absolute_path + "/path.cof", "w") as file: #se crea un fichero guardando el path en caso de existir
             file.write(qemu_path)
-        print(f"Se ha guardado el path a QEMU en path.cof: {qemu_path}")
+      	   
 
     def Play(self):
         if emulacion_activa():
@@ -1150,12 +1148,12 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
         if(self.terminal_command is not None):
             with self.mutex_gpio:
                 self.vgpio = VGPIOManager()
-           
+
             with self.mutex:
                 self.stop = 0
             self.command_thread = threading.Thread(target=self.command_loop)
             self.command_thread.start()
-          
+
             time.sleep(0.05) # esperamos 50ms para que de tiempo abrir el socket de nuevo
             with self.mutex:
                 self.stop = 0
@@ -1168,12 +1166,12 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
     def Stop(self):
         with self.mutex:
             self.stop = 1
-    
+   
         if(self.command_thread != 0):
-      
+        
             self.command_thread.join()
             self.command_thread = 0
-     
+    
         if self.emulacion_activa():
             with self.mutex_gpio:
                 self.vgpio.close()
@@ -1200,13 +1198,13 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
 
         
     def command_loop(self): # METER MUTEX
-    
+
         while not self.dame_stop():
-          
+     
             if(len(self.dame_conexiones()) > 0 and emulacion_activa()): # Si no hay ninguna conexion no reviso
                 parse = ""
                 obtenido = None
-              
+           
                 if emulacion_activa():
                     with self.mutex_gpio:
                         parse = self.vgpio.read_all_gpio().split()
@@ -1220,11 +1218,11 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
                     with self.mutex:
                         for id in self.conexiones: # Recorro todas las conexiones
                             if(id in self.estado_leds):  # Separo comportamiento segun dispositivo
-                            
+
                                 with self.mutex_gpio:
                                     valor_GPIO = self.vgpio.get_GPIO_Val(int(self.conexiones[id]),obtenido) #para un GPIO da su valor
                                 self.estado_leds[id] = valor_GPIO
-                             
+                              
                         
                 delayAux = self.dame_delay()
                 time.sleep(delayAux)
@@ -1245,7 +1243,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
         
 
     def debugear(self):
-       
+     
         if(self.debug):
             subprocess.Popen("pkill gdb-multiarch", shell=True)
             self.debug = False	
