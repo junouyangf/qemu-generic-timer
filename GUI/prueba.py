@@ -152,7 +152,7 @@ def save_clic(event = None):
     with open(absolute_path + "datos.json", "w") as json_file:
         json.dump(data, json_file)
 
-    print(json.dumps(data, indent=4))
+    (json.dumps(data, indent=4))
 
 def load_clic(event = None):
     clean_clic()
@@ -408,7 +408,6 @@ class VGPIOManager(object):
 
     def toggle(self, gpionum):
         v = self.get(gpionum)
-        print("value: {}".format(v))
         return self.set(gpionum, not v)
 
     def parse(self, s):
@@ -640,12 +639,11 @@ class GUI():
     def add_item(self,imagen,tipo, on_hold_func=None, on_release_func=None):
         x = 50 #+ (elementos % 5) * 100  # 5 es el número máximo de elementos por fila
         y = 50 #+(elementos // 5) * 50 
-        print("Antes de crear")
        
         identificador = self.canvas.create_image(x, y , tags = tipo)
         self.imagenes_mostradas[identificador]  = ImageTk.PhotoImage(file=imagen)
         self.canvas.itemconfig(identificador,image= self.imagenes_mostradas[identificador] )
-        print("Despues" + str(identificador))
+      
         self.canvas.tag_bind(identificador, "<B1-Motion>", lambda event: on_motion(event, identificador))
         self.canvas.tag_bind(identificador, "<Button-3>", lambda event: show_popup(event, identificador))
         self.canvas.tag_bind(identificador, "<Button-2>", lambda event: delete_clic(event, identificador))
@@ -1152,12 +1150,12 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
         if(self.terminal_command is not None):
             with self.mutex_gpio:
                 self.vgpio = VGPIOManager()
-            print("8910")
+           
             with self.mutex:
                 self.stop = 0
             self.command_thread = threading.Thread(target=self.command_loop)
             self.command_thread.start()
-            print("111")
+          
             time.sleep(0.05) # esperamos 50ms para que de tiempo abrir el socket de nuevo
             with self.mutex:
                 self.stop = 0
@@ -1170,12 +1168,12 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
     def Stop(self):
         with self.mutex:
             self.stop = 1
-        print("7")
+    
         if(self.command_thread != 0):
-            print("8")
+      
             self.command_thread.join()
             self.command_thread = 0
-            print("89")
+     
         if self.emulacion_activa():
             with self.mutex_gpio:
                 self.vgpio.close()
@@ -1202,13 +1200,13 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
 
         
     def command_loop(self): # METER MUTEX
-        print("1")
+    
         while not self.dame_stop():
-            print("2")
+          
             if(len(self.dame_conexiones()) > 0 and emulacion_activa()): # Si no hay ninguna conexion no reviso
                 parse = ""
                 obtenido = None
-                print("3")
+              
                 if emulacion_activa():
                     with self.mutex_gpio:
                         parse = self.vgpio.read_all_gpio().split()
@@ -1222,11 +1220,11 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
                     with self.mutex:
                         for id in self.conexiones: # Recorro todas las conexiones
                             if(id in self.estado_leds):  # Separo comportamiento segun dispositivo
-                                print("led se va a leer")
+                            
                                 with self.mutex_gpio:
                                     valor_GPIO = self.vgpio.get_GPIO_Val(int(self.conexiones[id]),obtenido) #para un GPIO da su valor
                                 self.estado_leds[id] = valor_GPIO
-                                print("led " + str(id) + " Puesto a " + str(valor_GPIO))
+                             
                         
                 delayAux = self.dame_delay()
                 time.sleep(delayAux)
@@ -1247,7 +1245,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
         
 
     def debugear(self):
-        print("1")
+       
         if(self.debug):
             subprocess.Popen("pkill gdb-multiarch", shell=True)
             self.debug = False	
