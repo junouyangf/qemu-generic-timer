@@ -2,19 +2,16 @@
 .globl _start
  
 _start:
-    // in QEMU all of 4 ARM CPUs are started simultaniously
-    // by default. I don't know if this is the real hw behaviour,
-    // but here I jump to halt if CPU ID (stored in MPIDR
-    // register, first 2 bits) is not 0
+
     mrs   x1, mpidr_el1
     and   x1, x1, #3
     cmp   x1, #0
     bne   hang 
 
-    // address for stack pointer
+    // direccion SP
     ldr   x1, =_start
 
-    // drop to EL2
+    // bajar a EL2
     mov   x2, #0x401    // RW=1, NS=1
     msr   scr_el3, x2
     mov   x2, #0x3c9    // D=1, A=1, I=1, F=1 M=EL2h
@@ -24,17 +21,17 @@ _start:
     eret
 
 start_el2:
-    // set sp in EL1
+    // SP de EL1
     msr   sp_el1, x1
-    // enable AArch64 in EL1
+  
     mov   x0, #(1 << 31)      // AArch64
-    orr   x0, x0, #(1 << 1)   // SWIO hardwired on Pi3
+    
     msr   hcr_el2, x0
-    mrs   x0, hcr_el2
-    // set vector address in EL1.
+
+    // ponemos el vector de excepiciones a EL1
     ldr x0, =vector
     msr vbar_el1, x0 
-    // change execution level to EL1
+
     mov   x2, #0x3c4         // D=1, A=1, I=1, F=1 M=EL1t
     msr   spsr_el2, x2
     adr   x2, start_el1
