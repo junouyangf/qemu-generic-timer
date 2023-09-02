@@ -16,4 +16,4 @@ Datasheet BCM2837
 4) Para continuar, simplemente introduciremos:
 > c  
 
-Y podremos observar cómo el LED se enciende o apaga.
+5) Finalemente, podremos observar cómo el LED se enciende o apaga.
