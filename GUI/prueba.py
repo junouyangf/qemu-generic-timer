@@ -1142,7 +1142,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
             if  len(self.archivo) > 0  and os.path.exists(self.archivo):
                 self.terminal_command = f"gnome-terminal -- {self.qemu_path} -M raspi3b  -s -kernel {self.archivo} -nographic -qtest unix:/tmp/tmp-gpio.sock " #-qtest-log /dev/null" descativa log
             elif   len(self.archivo_kernel) > 0 and os.path.exists(self.archivo_kernel) and len(self.archivo_img) > 0 and os.path.exists(self.archivo_img) and len(self.archivo_dbt) > 0 and os.path.exists(self.archivo_dbt):
-                self.terminal_command = f'gnome-terminal -- {self.qemu_path} -s -M raspi3b  -kernel {self.archivo_kernel} -sd {self.archivo_img} -serial stdio -append "rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1" -dtb  {self.archivo_dbt} -qtest unix:/tmp/tmp-gpio.sock '
+                self.terminal_command = f'gnome-terminal -- {self.qemu_path} -s -M raspi3b  -kernel {self.archivo_kernel} -sd {self.archivo_img} -serial stdio -append "rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1" -dtb  {self.archivo_dbt} -qtest unix:/tmp/tmp-gpio.sock -qtest-log /dev/null'
         else:
             return 0
         if(self.terminal_command is not None):
