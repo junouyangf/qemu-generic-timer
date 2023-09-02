@@ -1,29 +1,15 @@
-# Práctica 3 con System Timer
-Cuidado: Para poder probar la práctica hay que cambiar antes las rutas que vienen en los scripts.
+# Programa bare-metal con System Timer
+Funcionamiento: De manera periódica, la salida correspondiente al GPIO 6, alternará. Así, si asignamos a un LED el GPIO 6, este de manera periódica, se encenderá o apagará.
 
 Datasheet BCM2837
 >https://datasheets.raspberrypi.com/bcm2836/bcm2836-peripherals.pdf
 
-
 # Depuración
-1) Abrir 3 terminales
-> ./qemu-rpi-gpio
+1) En la aplicación de interfaz de usuario, añadiremos un led asignado al GPIO 6 y ejecutamos la opción de depuración.
 
->./run.sh
-
->./debug.sh
-
-2) En el terminal de depuración, pondremos un breakpoint para acceder al main:
-> b main
-
-> c
-
-3) A continuación, pondremos un breakpoint en la línea 133 para poder ver el tratamiento de las interrupciones periódicas:
+2) A continuación, pondremos un breakpoint en la línea 122 para poder ver el tratamiento de las interrupciones periódicas:
 > b 133
 
 > c
 
-4) Para comprobar que el programa esté funcionando correctamente, utilizaremos el terminal de qemu-rpip-gpio y leeremos el valor del GPIO 6, el cual cada vez que se produce la interrupción alterna su valor (true o false).
-> get 6
-
-5) Debería producirse la interrupción periódicamente. (Actualmente solo lo realiza una sola vez)
+3) Para comprobar que el programa esté funcionando correctamente, simplemente de manera periódica se generará la interrupción y se cambiará el valor del GPIO, y por ende, el LED se encenderá o apagará.
