@@ -1,11 +1,31 @@
 
-MEMORY
-{
-    ram : ORIGIN = 0x8000, LENGTH = 0x1000
-}
-
+ 
 SECTIONS
 {
-    .text : { *(.text*) } > ram
-    .bss : { *(.bss*) } > ram
+    /* Starts at LOADER_ADDR. */
+    . = 0x80000;
+   
+    .text :
+    {
+        *(.text)
+    }
+    . = ALIGN(4096); /* align to page size */
+
+ 
+
+    .data :
+    {
+        *(.data)
+    }
+    . = ALIGN(4096); /* align to page size */
+
+ 
+
+    .bss :
+    {
+        bss = .;
+        *(.bss)
+    }
+    . = ALIGN(4096); /* align to page size */
+
 }
