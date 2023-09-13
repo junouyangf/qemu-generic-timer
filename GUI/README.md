@@ -6,7 +6,7 @@
 + La aplicación ha sido desarrollada y probada en ubuntu 22
 
 # Uso
-+ Para ejecutar el programa es necesario que se encuentre en el mismo directorio que la carpeta IMG y escribir en el terminal: python3 prueba.py
++ Para ejecutar el programa es necesario que se encuentre en el mismo directorio que la carpeta IMG y escribir en el terminal: python3 GPIO_simulator.py
 
 + Una vez ejecutado debería aparecer una ventana nueva con la interfaz de usuario, el terminal donde se ha ejecutado el comando anterior servirá de debug para ver potenciales errores y mensajes del sistema en caso de error en la aplicación.
 
