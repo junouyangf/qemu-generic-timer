@@ -1,3 +1,10 @@
+#Copyright (C) 2023  Jun Ouyang Fan - José Ángel Ruiz Hernández
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License.
+
+# Original VGPIOManager : https://github.com/berdav/qemu-rpi-gpio/blob/master/qemu-rpi-gpio
+
 #!/usr/bin/env python3
 import tkinter as tk
 
@@ -36,8 +43,8 @@ tooltips_text = {
     'rasp': 'Clic derecho para más información',
     'debug': 'Activa/Desactiva Debug',
     'terminal': 'Abrir terminal de comandos',
-    'Play' : 'Play',
-    'Stop' : 'Stop'
+    'Play' : 'Iniciar',
+    'Stop' : 'Parar'
 }
 gpio_pinOut = {
         3: 2, 5: 3, 7: 4, 8: 14, 10: 15,
@@ -283,6 +290,8 @@ def delete_clic(event,id):
     global gui,app
     gui.delete_item(id)
     app.delete_item(id)
+    
+
 class VGPIOManager(object):
     fd = None
     
@@ -334,19 +343,17 @@ class VGPIOManager(object):
     def close(self):
         self.fd.close()
 
-    def help(self):
-        s  = "[ ] Virtual GPIO manager\n"
+    def help(self): #Translated
+        s  = "[ ] Controlador virtual de GPIO\n"
         s += "    Usage:\n"
-        s += "    help                     -- this help message\n"
-        s += "    get <gpionum>            -- read a specific gpio\n"
-        s += "    set <gpionum> <value>    -- Set a gpio to a specific value\n"
-        s += "    toggle <gpionum>         -- change the value of the gpio\n"
-        s += "    read-area                -- read entire gpio area\n"
-        s += "    read-ic                  -- read entire interrupt controller area\n"
-        s += "    readl <address>          -- read 32 bit from address\n"
-        s += "    writel <address> <value> -- read 32 bit from address\n"
-        s += "    exit                     -- exit from program\n"
-        s += "    reload                   -- restart the initialization\n"
+        s += "    help                     -- Muestra este mensaje\n"
+        s += "    get <gpionum>            -- Lee un GPIO específico\n"
+        s += "    set <gpionum> <value>    -- Pone un GPIO a un valor\n"
+        s += "    toggle <gpionum>         -- Alterna el valor de un GPIO\n"
+        s += "    read-area                -- Lee el area de GPIO\n"
+        s += "    read-ic                  -- Lee el area del controlador de interrupciones\n"
+        s += "    readl <address>          -- Lee 32 bits de la dirección\n"
+        s += "    writel <address> <value> -- Escribe 32 bits en la dirección\n"
         return s
 
     def get_gpio_location(self, num):
@@ -374,11 +381,11 @@ class VGPIOManager(object):
 
         return str((v & gpio)!=0)
 
-    def get_GPIO_Val(self, gpionum,data):
+    def get_GPIO_Val(self, gpionum,data): # Added 10/7/2023
         gpio = 1 << (gpionum % 32)
         return str((data & gpio)!=0)
     
-    def carga_estado_GPIO(self):
+    def carga_estado_GPIO(self): # Added 10/7/2023
         try:
 
             valor= int(self.readl(GPIO_RANGE[0]).split()[1],0)
@@ -451,8 +458,6 @@ class VGPIOManager(object):
             if len(s) < 2:
                 return "Error: toggle requires 1 argument"
             return self.toggle(int(s[1]))
-        elif c == 'reload':
-            return self.load()
         return "Comando no válido, use 'help' para ver los comandos disponibles"
 
 class GUI():
@@ -977,8 +982,8 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
             try:
                 
                 self.command_thread = 0
-                print('[ ] Virtual GPIO manager')
-                print('[ ] Listening for connections')
+                print('[ ] Controlador virtual de GPIO')
+                print('[ ] Escuchando conexiones')
 
                 if os.path.exists(absolute_path + "/path.cof"):     # Si el archivo path.cof existe, cargar el qemu_path desde allí
                     with open(absolute_path + "/path.cof", "r") as file:
@@ -1271,7 +1276,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
 
 
 
-
+print("Iconos de icons8.com")
 global app
 app = Aplicacion()
 
