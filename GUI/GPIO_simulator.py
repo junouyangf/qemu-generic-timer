@@ -935,18 +935,16 @@ class GUI():
        
 
     def help(self):
-        s  = "[ ] Virtual GPIO manager\n"
+        s  = "[ ] Controlador virtual de GPIO\n"
         s += "    Usage:\n"
-        s += "    help                     -- this help message\n"
-        s += "    get <gpionum>            -- read a specific gpio\n"
-        s += "    set <gpionum> <value>    -- Set a gpio to a specific value\n"
-        s += "    toggle <gpionum>         -- change the value of the gpio\n"
-        s += "    read-area                -- read entire gpio area\n"
-        s += "    read-ic                  -- read entire interrupt controller area\n"
-        s += "    readl <address>          -- read 32 bit from address\n"
-        s += "    writel <address> <value> -- read 32 bit from address\n"
-        s += "    exit                     -- exit from program\n"
-        s += "    reload                   -- restart the initialization\n"
+        s += "    help                     -- Muestra este mensaje\n"
+        s += "    get <gpionum>            -- Lee un GPIO específico\n"
+        s += "    set <gpionum> <value>    -- Pone un GPIO a un valor\n"
+        s += "    toggle <gpionum>         -- Alterna el valor de un GPIO\n"
+        s += "    read-area                -- Lee el area de GPIO\n"
+        s += "    read-ic                  -- Lee el area del controlador de interrupciones\n"
+        s += "    readl <address>          -- Lee 32 bits de la dirección\n"
+        s += "    writel <address> <value> -- Escribe 32 bits en la dirección\n"
         return s
         
     def choose_file(self,text, file_types,title):
