@@ -80,32 +80,15 @@ int button_read(void)
 }
 
 
-void short_wait(void)
-{
-	int w;
-	for (w=0; w<100; w++) {
-		w++;
-		w--;
-	}
-}
-
-
-void long_wait(void)
-{
-	int w;
-	for (w=0; w<100; w++) {
-		short_wait();
-	}
-}
 
 
 void setup_gpio()
 {
-    	// Configurar GPIO 19 como INPUT (000) --> Boton
+    	// Configurar GPIO 19 como INPUT
 	GPFSEL1 = GPFSEL1 & ~(0x7 << 9*3);
 
 	
-	// Configurar GPIO 6 como OUTPUT (001) --> LED2
+	// Configurar GPIO 6 como OUTPUT
 	GPFSEL0 = (GPFSEL0 & ~(0x7 << 6*3)) | (0x1 << 6*3);
 
 	
@@ -137,7 +120,6 @@ void c_irq_handler (void)
 	else if (IRQ_PEND2 & (0x1 << 17)) {
 		//Interrupción del GPIO19
 		if (GPEDS0 & (0x1 << 19)) {
-			long_wait();
 			if (button_read() == BUTTON_PUSHED) {
 				//Tratamos la pulsación del botón
 				
