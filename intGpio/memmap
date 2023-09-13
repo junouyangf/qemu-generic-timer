@@ -21,6 +21,6 @@ SECTIONS
         bss = .;
         *(.bss)
     }
-    . = ALIGN(4096); /* align to page size */
+    . = ALIGN(4096); 
 
 }
