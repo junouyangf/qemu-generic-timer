@@ -9,9 +9,10 @@
  *
  * GPIO External support
  *  Davide Berardi <berardi.dav@gmail.com>
- *
+ * GPHEN support
+ *  José Ángel Ruiz Hernández - Jun Ouyang Fan
  * This work is licensed under the terms of the GNU GPL, version 2 or later.
- * See the COPYING file in the top-level directory.
+ * https://github.com/qemu/qemu/blob/master/LICENSE
  */
 
 #include "qemu/osdep.h"
