@@ -68,37 +68,21 @@ int button2_read(void)
 }
 
 
-void short_wait(void)
-{
-	int w;
-	for (w=0; w<100; w++) {
-		w++;
-		w--;
-	}
-}
 
-
-void long_wait(void)
-{
-	int w;
-	for (w=0; w<100; w++) {
-		short_wait();
-	}
-}
 
 
 void setup_gpio()
 {
-    // Configurar GPIO 5 como OUTPUT (001) --> L1
+    // Configuramos GPIO 5 como OUTPUT 
     GPFSEL0 = (GPFSEL0 & ~(0x7 << 5*3)) | (0x1 << 5*3);
 
-    // Configurar GPIO 6 como OUTPUT (001) --> L2
+    // Configuramos GPIO 6 como OUTPUT
     GPFSEL0 = (GPFSEL0 & ~(0x7 << 6*3)) | (0x1 << 6*3);
 
-    // Configurar GPIO 19 como INPUT (000) --> P1
+    // Configuramos GPIO 19 como INPUT 
     GPFSEL1 = GPFSEL1 & ~(0x7 << 9*3);
 
-    // Configurar GPIO 20 como INPUT (000) --> P2
+    // Configuramos GPIO 20 como INPUT
     GPFSEL2 = GPFSEL2 & ~(0x7 << 0*3);
 
 }
@@ -119,8 +103,6 @@ int main (void)
 			P2_st = button2_read();
 		} while ((P1_st == BUTTON_RELEASED) && (P2_st == BUTTON_RELEASED));
 
-		long_wait();
-
 		if (P1_st == BUTTON_PUSHED) {
 
 			led1_switch();
@@ -133,8 +115,6 @@ int main (void)
 			led2_switch();
 			while (button2_read() != BUTTON_RELEASED);
 		}
-
-		long_wait();
 	}
 
     return 0;
