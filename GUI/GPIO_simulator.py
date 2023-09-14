@@ -982,10 +982,10 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
                 print('[ ] Controlador virtual de GPIO')
                 print('[ ] Escuchando conexiones')
 
-                if os.path.exists(absolute_path + "/path.cof"):     # Si el archivo path.cof existe, cargar el qemu_path desde allí
-                    with open(absolute_path + "/path.cof", "r") as file:
+                if os.path.exists(absolute_path + "/path.conf"):     # Si el archivo path.conf existe, cargar el qemu_path desde allí
+                    with open(absolute_path + "/path.conf", "r") as file:
                         self.qemu_path = file.read().strip()
-                    print(f"Cargando qemu_path desde path.cof: {self.qemu_path}")
+                    print(f"Cargando qemu_path desde path.conf: {self.qemu_path}")
                 
             except Exception  as e: 
                 print(f"Se ha producido una excepción: " + e) 
@@ -1131,7 +1131,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
         return False
 
     def guardar_path_qemu(self,qemu_path):
-        with open(absolute_path + "/path.cof", "w") as file: #se crea un fichero guardando el path en caso de existir
+        with open(absolute_path + "/path.conf", "w") as file: #se crea un fichero guardando el path en caso de existir
             file.write(qemu_path)
       	   
 
