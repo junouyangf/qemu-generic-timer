@@ -336,7 +336,7 @@ class VGPIOManager(object):
         v = self.read(GPIO_RANGE[0], 0x1000)
         return v
 
-    def read_all_gpio(self):
+    def read_all_gpio(self): # Added 10/7/2023
         v = self.readl(GPIO_RANGE[0] + GPIO_READ_OFFSET)
         return v
 
@@ -381,7 +381,7 @@ class VGPIOManager(object):
 
         return str((v & gpio)!=0)
 
-    def get_GPIO_Val(self, gpionum,data): # Added 10/7/2023
+    def get_GPIO_Val(self, gpionum,data):
         gpio = 1 << (gpionum % 32)
         return str((data & gpio)!=0)
     
@@ -636,8 +636,7 @@ class GUI():
                         else:
                             self.actualiza_led(full_path_LedOFF,id)
         delay = get_delay()
-        if delay < 0.1: delayAux = 0.1
-        else: delayAux = delay
+        delayAux = delay
         self.root.after(int(delayAux * 1000), self.periodical_led_update)
     def delete_item(self,id):
       
