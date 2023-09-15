@@ -32,16 +32,13 @@ start_el2:
     ldr x0, =vector
     msr vbar_el1, x0 
 
-    mov   x2, #0x3c4         // D=1, A=1, I=1, F=1 M=EL1t
+    mov   x2, #0x3c4         // D=1, A=1, I=1, F=1 M=EL1h
     msr   spsr_el2, x2
     adr   x2, start_el1
     msr   elr_el2, x2
     eret
 
 start_el1:
-    // set sp
-    mov   sp, #0x08000000
-
     bl main
 
 hang:
@@ -99,15 +96,15 @@ vector:
 .balign 128
     b hang
 .balign 128
-    b irq
-.balign 128
     b hang
 .balign 128
     b hang
 .balign 128
     b hang
 .balign 128
-    b hang //
+    b hang
+.balign 128
+    b irq //
 .balign 128
     b hang
 .balign 128
