@@ -32,7 +32,7 @@ start_el2:
     ldr x0, =vector
     msr vbar_el1, x0 
 
-    mov   x2, #0x3c4         // D=1, A=1, I=1, F=1 M=EL1h
+    mov   x2, #0x3c5         // D=1, A=1, I=1, F=1 M=EL1h
     msr   spsr_el2, x2
     adr   x2, start_el1
     msr   elr_el2, x2
