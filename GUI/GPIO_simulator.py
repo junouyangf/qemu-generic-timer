@@ -1192,7 +1192,7 @@ class Aplicacion(): #AL ESCRIBIR EN GPIO POR BOTON COMPROBAR SI ESTA A 1 Y EN ES
     
 
     def set_delay(self,valor):
-        if(self.is_float(valor)):
+        if(self.is_float(valor)and float(valor)>=0):
             with self.mutex_sleep:
                 self.delay = float(valor)
             return True
