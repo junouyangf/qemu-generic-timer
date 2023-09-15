@@ -29,7 +29,7 @@
 	
 	- Recargar(doble flecha): Reinicia QEMU, si has cargado un path nuevo para QEMU cargará este último.
 	
-	- Velocidad de consultas(cronómetro): Muestra un pop up donde se puede agregar cierto retraso a las consultas, el valor introducido en segundos se esperará antes de cada consulta a QEMU, sin contar aquellas realizadas manualmente como presionar un botón.
+	- Velocidad de consultas(cronómetro): Muestra un pop up donde se puede agregar cierto retraso a las consultas, el valor introducido en segundos se esperará antes de cada consulta a QEMU, sin contar aquellas realizadas manualmente como presionar un botón. (No establecer frecuencias 0.001, aparte de inncesario porque las consultas se demoran alrededor de 0.05 cada una, puede dar lugar a errores)
 	
 	- Ocultar cables (ojo): Oculta/muestra los cables a los pines desde cada item, es útil si hay demasiados en pantalla.
 	
